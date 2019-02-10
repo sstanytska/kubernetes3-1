@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu request for container
+      kubia'
+  creationTimestamp: 2019-02-03T21:06:35Z
+  generateName: kubia-rc-
+  labels:
+    app: kubia-pod
+  name: kubia-rc-mlhcj
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicationController
+    name: kubia-rc
+    uid: 97111ed2-27f7-11e9-951a-42010a800228
+  resourceVersion: "778912"
+  selfLink: /api/v1/namespaces/default/pods/kubia-rc-mlhcj
+  uid: 97137a72-27f7-11e9-951a-42010a800228
+spec:
+  containers:
+  - image: luksa/kubia
+    imagePullPolicy: Always
+    name: kubia
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 100m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-9h2h8
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: gke-kube-cluster-1-default-pool-178a89df-cckx
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-9h2h8
+    secret:
+      defaultMode: 420
+      secretName: default-token-9h2h8
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2019-02-03T21:06:35Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2019-02-03T21:06:37Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: null
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: 2019-02-03T21:06:35Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://ac0d6cb65d23462b2e3663a13f9313753a93b5a9610b25354321e89340cf9f04
+    image: luksa/kubia:latest
+    imageID: docker-pullable://luksa/kubia@sha256:3f28e304dc0f63dc30f273a4202096f0fa0d08510bd2ee7e1032ce600616de24
+    lastState: {}
+    name: kubia
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2019-02-03T21:06:37Z
+  hostIP: 10.128.0.3
+  phase: Running
+  podIP: 10.28.0.88
+  qosClass: Burstable
+  startTime: 2019-02-03T21:06:35Z
